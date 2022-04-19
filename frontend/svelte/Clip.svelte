@@ -58,7 +58,9 @@
                             </p>
                             <hr class="my-4" />
 
-                            <video on:ended={onClipEnd(clip.clip_id)} class="player" src="/api/clip/view/{clip.clip_id}" controls></video>
+                            <video class="player" on:ended={onClipEnd(clip.clip_id)} preload="metadata" controls>
+                                <source type={clip.type} src="/api/clip/view/{clip.clip_id}">
+                            </video>
                         </section>
                         <hr class="my-8" />
                     {/if}

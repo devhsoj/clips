@@ -2,6 +2,7 @@ interface Clip {
     clip_id:number
     user_id:number
     creator:string
+    type:string
     title:string
     description:string
     views:number

@@ -13,9 +13,6 @@
 
     async function handleScroll() {
         try {
-            const container = document.getElementById('clips')
-
-            console.log(container.scrollTop + container.clientHeight,container.scrollHeight,!alreadyLoadingClips)
             if(container.scrollTop + container.clientHeight === container.scrollHeight && !alreadyLoadingClips) {
 
                 alreadyLoadingClips = true
@@ -102,7 +99,9 @@
                                 </p>
                                 <hr class="my-4" />
 
-                                <video on:ended={onClipEnd(clip.clip_id)} class="player" src="/api/clip/view/{clip.clip_id}" controls></video>
+                                <video class="player" on:ended={onClipEnd(clip.clip_id)} preload="metadata" controls>
+                                    <source type={clip.type} src="/api/clip/view/{clip.clip_id}">
+                                </video>
                             </section>
                             <hr class="my-8" />
                         {/each}

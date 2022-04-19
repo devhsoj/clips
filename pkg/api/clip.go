@@ -50,6 +50,7 @@ func NewClip(c *fiber.Ctx) error {
 	clip := models.Clip{
 		UserID: user.UserID,
 		Creator: user.Username,
+		Type: clipFile.Header.Get("Content-Type"),
 		Title: clipTitle,
 		Description: clipDescription,
 		Source: clipFilePath,
