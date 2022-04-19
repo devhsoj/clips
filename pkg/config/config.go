@@ -1,0 +1,59 @@
+package config
+
+import (
+	"github.com/joho/godotenv"
+	"os"
+	"strconv"
+)
+
+var HTTPS bool
+var TLSCertPath string
+var TLSKeyPath string
+var ListenAddress string
+var PostgresURL string
+
+var BcryptCost int = 12 // Default to 12, so we don't have slow signups/logins
+var BodyLimit int = 100 * 1024 * 1024  // Default to 100 MB
+
+var ClipSavePath string
+
+// LoadConfig loads the environment variables from .env into the above variables
+func LoadConfig() error {
+	var err error
+
+	if err = godotenv.Load(); err != nil {
+		return err
+	}
+
+	HTTPS = os.Getenv("HTTPS") == "true"
+
+	if HTTPS {
+		TLSCertPath = os.Getenv("TLS_CERT")
+		TLSKeyPath = os.Getenv("TLS_KEY")
+	}
+
+	ListenAddress = os.Getenv("LISTEN_ADDRESS")
+	PostgresURL = os.Getenv("POSTGRES_URL")
+
+	if os.Getenv("BCRYPT_COST") != "" {
+		BcryptCost,err = strconv.Atoi(os.Getenv("BCRYPT_COST"))
+
+		if err != nil {
+			return err
+		}
+	}
+
+	if os.Getenv("BODY_LIMIT_MB") != "" {
+		BodyLimit,err = strconv.Atoi(os.Getenv("BODY_LIMIT_MB"))
+
+		BodyLimit = BodyLimit * 1024 * 1024
+
+		if err != nil {
+			return err
+		}
+	}
+
+	ClipSavePath = os.Getenv("CLIP_SAVE_PATH")
+
+	return err
+}

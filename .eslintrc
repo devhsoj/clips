@@ -1,0 +1,29 @@
+{
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es6": true,
+        "browser": true
+    },
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "svelte3"
+    ],
+    "overrides":[
+        {
+            "files": "*.svelte",
+            "processor": "svelte3/svelte3"
+        }
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "quotes":["error","single"],
+        "semi":["error","never"]
+    }
+}

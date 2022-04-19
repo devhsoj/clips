@@ -1,0 +1,35 @@
+{
+  "name": "clips",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "install": "go get",
+    "build": "rollup -c && go build -o build/",
+    "dev": "concurrently \"rollup -c -w\" \"nodemon --exec go run main.go\"",
+    "start": "go run main.go",
+    "check": "svelte-check frontend/ --tsconfig tsconfig.json"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@tsconfig/svelte": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "concurrently": "^7.0.0",
+    "eslint": "^8.12.0",
+    "eslint-plugin-svelte3": "^3.4.1",
+    "nodemon": "^2.0.15",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^2.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "svelte-spa-router": "^3.2.0",
+    "tslib": "^2.0.0",
+    "typescript": "^4.0.0"
+  }
+}
