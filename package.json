@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "install": "go get",
-    "build": "rollup -c && go build -o build/",
+    "build": "rollup -c && go build -o ./build/ ./...",
     "dev": "concurrently \"rollup -c -w\" \"nodemon --exec go run main.go\"",
     "start": "go run main.go",
     "check": "svelte-check frontend/ --tsconfig tsconfig.json"
