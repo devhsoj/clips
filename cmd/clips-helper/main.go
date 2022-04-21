@@ -1,7 +1,7 @@
 package main
 
 import (
-	"clips/internal/app/commands"
+	"clips/cmd/clips-helper/commands"
 	"clips/internal/config"
 	"clips/internal/db"
 	"clips/pkg/models"
@@ -25,7 +25,7 @@ func main() {
 	}
 
 	command := args[1]
-	commandArgs := args[1:]
+	commandArgs := args[2:]
 
 	switch command {
 	case "new-user":

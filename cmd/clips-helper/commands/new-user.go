@@ -13,14 +13,19 @@ func NewUser(args []string) error {
 	var username string
 	var password string
 
-	fmt.Print("Enter username: ")
-	if _,err := fmt.Scanln(&username); err != nil {
-		return err
-	}
+	if len(args) != 2 {
+		fmt.Print("Enter username: ")
+		if _,err := fmt.Scanln(&username); err != nil {
+			return err
+		}
 
-	fmt.Print("Enter password: ")
-	if _,err := fmt.Scanln(&password); err != nil {
-		return err
+		fmt.Print("Enter password: ")
+		if _,err := fmt.Scanln(&password); err != nil {
+			return err
+		}
+	} else {
+		username = args[0]
+		password = args[1]
 	}
 
 	hashedPassword,err := bcrypt.GenerateFromPassword([]byte(password),config.BcryptCost)
