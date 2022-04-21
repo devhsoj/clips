@@ -43,11 +43,11 @@
     <div class="container">
         <div class="row gx-md-11 gx-lg-0">
             <div id="clipsContainer" class="col-xl-9 order-xl-2">
-                <section id="clips" class="wrapper pt-8 pb-2">
+                <section class="wrapper pt-8 pb-2">
                     {#if clip === null}
                         <p>Clip not found.</p>
                     {:else}
-                        <section class="clip">
+                        <section class="container clip">
                             <h3 class="clip-link"><a href="/clip/{clip.clip_id}" use:link style="color:inherit;text-decoration:inherit;">{clip.title}</a></h3>
                             <p class="small" style="color:grey;">
                                 {clip.description} - <strong>{clip.creator}</strong>
@@ -82,15 +82,16 @@
         display:none;
     }
 
-    #clipsContainer {
-        width:800px;
-        height:700px;
-        overflow-y:scroll;
-        scrollbar-width:none;
+    video {
+        width:100%;
+        height:100%;
     }
 
-    #clipsContainer::-webkit-scrollbar {
-        display:none;
+    .clip {
+        overflow-y:scroll;
+        scrollbar-width:none;
+        padding-left:0;
+        padding-right:0;
     }
 
     .clip-link:hover {
