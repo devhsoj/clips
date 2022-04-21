@@ -68,7 +68,7 @@
         <div class="container pt-5 pb-5 text-center">
             <div class="row">
                 <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
-                    <h2 class="display-1 mb-3">Project Clips <span class="small">by Joshua Benfield</span></h2>
+                    <h2 class="display-1 mb-3">Project Clips</h2>
 <!--                    <p class="lead px-xxl-10">Check out some of the clips users have uploaded!</p>-->
                 </div>
             </div>
