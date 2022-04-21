@@ -1,13 +1,18 @@
 package controllers
 
 import (
-	"clips/pkg/data"
-	"clips/pkg/services"
+	"clips/internal/config"
+	"clips/internal/data"
+	"clips/internal/services"
 	"github.com/gofiber/fiber/v2"
 	"log"
 )
 
-func Login(c *fiber.Ctx) error {
+func Signup(c *fiber.Ctx) error {
+
+	if !config.AllowSignup {
+		return c.Status(401).SendString("Signup is disabled")
+	}
 
 	sess,err := data.Store.Get(c)
 
@@ -17,15 +22,19 @@ func Login(c *fiber.Ctx) error {
 		return c.Status(500).SendString("Unexpected Error")
 	}
 
-	login := data.Login{}
+	signup := data.Login{}
 
-	if err := c.BodyParser(&login); err != nil {
-		log.Printf("Failed to parse login body: %s",err)
-
+	if err := c.BodyParser(&signup); err != nil {
 		return c.Status(500).SendString("Unexpected Error")
 	}
 
-	res := services.UserAuth(login)
+	res,err := services.Signup(signup)
+
+	if err != nil {
+		log.Printf("Failed to signup: %s",err)
+
+		return c.Status(500).SendString("Unexpected Error")
+	}
 
 	if !res.Success {
 		return c.Status(res.Status).SendString(res.Message)
@@ -40,3 +49,4 @@ func Login(c *fiber.Ctx) error {
 
 	return c.Status(res.Status).SendString(res.Message)
 }
+

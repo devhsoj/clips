@@ -1,8 +1,8 @@
 package services
 
 import (
-	"clips/pkg/data"
-	"clips/pkg/db"
+	"clips/internal/data"
+	"clips/internal/db"
 	"clips/pkg/models"
 	"github.com/go-pg/pg/v10"
 	"golang.org/x/crypto/bcrypt"

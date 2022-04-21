@@ -1,7 +1,7 @@
 package db
 
 import (
-	"clips/pkg/config"
+	"clips/internal/config"
 	"github.com/go-pg/pg/v10"
 	"log"
 )

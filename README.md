@@ -37,7 +37,7 @@ or
 
 #### Starting
 ```bash
-# concurrently starts rollup in watch mode for frontend/, and nodemon to wait for changes in pkg/
+# concurrently starts rollup in watch mode for frontend/, and nodemon to wait for changes in internal/
 npm run dev 
 ```
 

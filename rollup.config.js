@@ -9,12 +9,12 @@ import css from 'rollup-plugin-css-only'
 const production = process.env.STAGING === 'production'
 
 export default {
-    input: 'frontend/index.ts',
+    input: 'web/app/index.ts',
     output: {
         sourcemap: true,
         format: 'iife',
         name: 'app',
-        file: 'public/build/bundle.js'
+        file: 'web/static/build/bundle.js'
     },
     plugins: [
         svelte({

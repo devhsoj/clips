@@ -1,7 +1,7 @@
 package main
 
 import (
-	"clips/pkg/app"
+	"clips/internal/app"
 )
 
 func main() {

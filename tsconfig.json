@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
 
-  "include": ["frontend/**/*"],
+  "include": ["web/app/**/*"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
 }

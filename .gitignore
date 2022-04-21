@@ -1,5 +1,5 @@
 .env
 build/
 node_modules/
-public/build/
-public/**/*.gz
+web/**/*.gz
+web/static/build/

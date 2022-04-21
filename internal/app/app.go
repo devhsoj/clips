@@ -1,11 +1,11 @@
 package app
 
 import (
-	"clips/pkg/config"
-	"clips/pkg/data"
-	"clips/pkg/db"
+	"clips/internal/config"
+	"clips/internal/data"
+	"clips/internal/db"
+	"clips/internal/routes"
 	"clips/pkg/models"
-	"clips/pkg/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/session"
 	"log"
@@ -31,7 +31,7 @@ func Start() {
 	data.Store = session.New()
 
 	// Setup static router for serving svelte bundles and other static files
-	data.Application.Static("/","./public",fiber.Static{Compress: true})
+	data.Application.Static("/","./web/static/",fiber.Static{Compress: true})
 
 	// Setup other routes
 	routes.SetupAPIRoutes()

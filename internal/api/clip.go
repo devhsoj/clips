@@ -1,9 +1,9 @@
 package api
 
 import (
-	"clips/pkg/config"
-	"clips/pkg/db"
-	"clips/pkg/models"
+	"clips/internal/config"
+	"clips/internal/db"
+	models2 "clips/pkg/models"
 	"fmt"
 	"github.com/go-pg/pg/v10"
 	"github.com/gofiber/fiber/v2"
@@ -20,7 +20,7 @@ func NewClip(c *fiber.Ctx) error {
 		})
 	}
 
-	user := c.Locals("user").(models.User)
+	user := c.Locals("user").(models2.User)
 
 	clipFile,err := c.FormFile("clip")
 
@@ -53,7 +53,7 @@ func NewClip(c *fiber.Ctx) error {
 	clipTitle := c.FormValue("title","No Title")
 	clipDescription := c.FormValue("description","No Description")
 
-	clip := models.Clip{
+	clip := models2.Clip{
 		UserID: user.UserID,
 		Creator: user.Username,
 		Type: clipFile.Header.Get("Content-Type"),
@@ -79,7 +79,7 @@ func NewClip(c *fiber.Ctx) error {
 func GetClip(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 
-	clip := models.Clip{}
+	clip := models2.Clip{}
 
 	err := db.Database.Model(&clip).
 		Where("clip_id = ?",clipID).
@@ -107,7 +107,7 @@ func GetClips(c *fiber.Ctx) error {
 	page,_ := strconv.Atoi(c.Query("page","0"))
 	amount,_ := strconv.Atoi(c.Query("amount","10"))
 
-	var clips []models.Clip
+	var clips []models2.Clip
 
 	err := db.Database.Model(&clips).
 		Order("clip_id ASC").
@@ -136,7 +136,7 @@ func GetClips(c *fiber.Ctx) error {
 func ViewClip(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 
-	clip := models.Clip{}
+	clip := models2.Clip{}
 
 	err := db.Database.Model(&clip).
 		Where("clip_id = ?",clipID).
@@ -168,7 +168,7 @@ func IncrementViews(c *fiber.Ctx) error {
 
 	var views uint64
 
-	err := db.Database.Model(&models.Clip{}).
+	err := db.Database.Model(&models2.Clip{}).
 		Column("views").
 		Where("clip_id = ?",clipID).
 		Select(&views)
@@ -191,7 +191,7 @@ func IncrementViews(c *fiber.Ctx) error {
 
 	}
 
-	_,err = db.Database.Model(&models.Clip{}).
+	_,err = db.Database.Model(&models2.Clip{}).
 		Set("views = views + 1").
 		Where("clip_id = ?",clipID).
 		Update()

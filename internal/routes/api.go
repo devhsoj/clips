@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"clips/pkg/api"
-	"clips/pkg/data"
+	"clips/internal/api"
+	"clips/internal/data"
 	"github.com/gofiber/fiber/v2"
 )
 

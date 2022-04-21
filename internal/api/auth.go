@@ -1,8 +1,8 @@
 package api
 
 import (
-	"clips/pkg/data"
-	"clips/pkg/services"
+	"clips/internal/data"
+	"clips/internal/services"
 	"github.com/gofiber/fiber/v2"
 	"log"
 )

@@ -1,7 +1,7 @@
 package api
 
 import (
-	"clips/pkg/db"
+	"clips/internal/db"
 	"clips/pkg/models"
 	"github.com/go-pg/pg/v10"
 	"github.com/gofiber/fiber/v2"

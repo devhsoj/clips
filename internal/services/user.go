@@ -1,9 +1,9 @@
 package services
 
 import (
-	"clips/pkg/config"
-	"clips/pkg/data"
-	"clips/pkg/db"
+	"clips/internal/config"
+	"clips/internal/data"
+	"clips/internal/db"
 	"clips/pkg/models"
 	"golang.org/x/crypto/bcrypt"
 	"log"

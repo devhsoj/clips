@@ -1,10 +1,12 @@
 package services
 
-import "clips/pkg/models"
+import (
+	"clips/pkg/models"
+)
 
 type Response struct {
-	Status int
+	Status  int
 	Success bool
 	Message string
-	User models.User
+	User    models.User
 }
