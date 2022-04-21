@@ -16,6 +16,8 @@ var BcryptCost int = 12 // Default to 12, so we don't have slow signups/logins
 var BodyLimit int = 100 * 1024 * 1024  // Default to 100 MB
 
 var ClipSavePath string
+var AllowSignup bool = true
+var AllowUpload bool = true
 
 // LoadConfig loads the environment variables from .env into the above variables
 func LoadConfig() error {
@@ -54,6 +56,8 @@ func LoadConfig() error {
 	}
 
 	ClipSavePath = os.Getenv("CLIP_SAVE_PATH")
+	AllowSignup = os.Getenv("ALLOW_SIGNUP") == "true" || os.Getenv("ALLOW_SIGNUP") == ""
+	AllowUpload = os.Getenv("ALLOW_UPLOAD") == "true" || os.Getenv("ALLOW_UPLOAD") == ""
 
 	return err
 }

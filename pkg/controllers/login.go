@@ -13,14 +13,16 @@ func Login(c *fiber.Ctx) error {
 
 	if err != nil {
 		log.Printf("Failed to get session: %s",err)
-		return c.SendStatus(500)
+
+		return c.Status(500).SendString("Unexpected Error")
 	}
 
 	login := data.Login{}
 
 	if err := c.BodyParser(&login); err != nil {
 		log.Printf("Failed to parse login body: %s",err)
-		return c.SendStatus(500)
+
+		return c.Status(500).SendString("Unexpected Error")
 	}
 
 	res := services.UserAuth(login)

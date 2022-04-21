@@ -14,6 +14,12 @@ import (
 )
 
 func NewClip(c *fiber.Ctx) error {
+	if !config.AllowUpload {
+		return c.Status(500).JSON(fiber.Map{
+			"error":"Uploading is disabled",
+		})
+	}
+
 	user := c.Locals("user").(models.User)
 
 	clipFile,err := c.FormFile("clip")
