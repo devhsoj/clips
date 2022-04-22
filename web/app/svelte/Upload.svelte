@@ -56,8 +56,8 @@
                                 <label for="description">Description</label>
                             </div>
 
-                            <div class="form-label-group mb-1">
-                                <div>Select file to upload:</div>
+                            <div class="form-label-group mb-1 mt-3">
+                                <div>Select video clip to upload:</div>
                                 <input type="file" name="clip" accept="video/*" required />
                             </div>
 
