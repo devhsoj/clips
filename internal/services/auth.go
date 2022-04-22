@@ -44,6 +44,7 @@ func UserAuth(login data.Login) Response {
 		}
 
 		log.Printf("Failed to query user: %s",err)
+
 		return Response{Success: false, Status: 500, Message: "Unexpected Error"}
 	}
 

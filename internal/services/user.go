@@ -15,6 +15,7 @@ func Signup(login data.Login) (Response,error) {
 
 	if err != nil {
 		log.Printf("Failed to generate bcrypt hash: %s",err)
+
 		return Response{Success: false, Status: 500, Message: "Unexpected Error"},err
 	}
 
@@ -26,6 +27,7 @@ func Signup(login data.Login) (Response,error) {
 
 	if err != nil {
 		log.Printf("Failed to find if user exists: %s",err)
+
 		return Response{Success: false, Status: 500, Message: "Unexpected Error"},err
 	}
 
@@ -40,6 +42,7 @@ func Signup(login data.Login) (Response,error) {
 
 	if err != nil {
 		log.Printf("Failed to insert new user: %s",err)
+
 		return Response{Success: false, Status: 500, Message: "Unexpected Error"},err
 	}
 

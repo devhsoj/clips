@@ -36,6 +36,8 @@ func Login(c *fiber.Ctx) error {
 
 	if err = sess.Save(); err != nil {
 		log.Printf("Failed to save session: %s",err)
+
+		return c.Status(500).SendString("Unexpected Error")
 	}
 
 	return c.Status(res.Status).SendString(res.Message)

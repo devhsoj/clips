@@ -41,9 +41,11 @@ func Start() {
 
 	if config.HTTPS {
 		log.Printf("Starting on https://%s",config.ListenAddress)
+
 		err = data.Application.ListenTLS(config.ListenAddress,config.TLSCertPath,config.TLSKeyPath)
 	} else {
 		log.Printf("Starting on http://%s",config.ListenAddress)
+
 		err = data.Application.Listen(config.ListenAddress)
 	}
 
