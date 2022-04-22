@@ -9,5 +9,7 @@ import (
 func Ping(c *fiber.Ctx) error {
 	user := c.Locals("user").(models.User)
 
-	return c.Status(200).SendString(fmt.Sprintf("Authenticated as %s",user.Username))
+	return c.JSON(fiber.Map{
+		"message":fmt.Sprintf("Authenticated as %s",user.Username),
+	})
 }

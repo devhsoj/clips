@@ -11,7 +11,7 @@ import (
 
 func GetMe(c *fiber.Ctx) error {
 
-	user := c.Locals("user",fiber.Map{})
+	user := c.Locals("user")
 
 	return c.JSON(&user)
 }
