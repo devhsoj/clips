@@ -14,18 +14,18 @@ func Auth(c *fiber.Ctx) error {
 		log.Printf("Failed to get session: %s",err)
 	}
 
-	apiKey := c.GetReqHeaders()["X-Api-Key"]
-
-	if len(apiKey) == 0 {
-		return c.SendStatus(401)
-	}
-
-	// We keep these two auth checks separate so one doesn't get called if the other passes
-
 	if sess.Get("active") == true {
 		c.Locals("user",sess.Get("user"))
 
 		return c.Next()
+	}
+
+	// We keep these auth checks separate so one doesn't get called if the other passes
+
+	apiKey := c.GetReqHeaders()["X-Api-Key"]
+
+	if len(apiKey) == 0 {
+		return c.SendStatus(401)
 	}
 
 	if res := services.APIKeyAuth(apiKey); res.Success {

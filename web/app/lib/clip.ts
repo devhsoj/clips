@@ -49,7 +49,7 @@ async function getClip(options:{clip_id:number}):Promise<Clip> {
     }
 }
 
-async function incrementViews(clipID:number):Promise<number> {
+async function incrementViews(clipID:number):Promise<void> {
     try {
         const res = await fetch(`/api/clip/views/${ clipID }`,{method:'POST'})
 
@@ -59,9 +59,7 @@ async function incrementViews(clipID:number):Promise<number> {
             return Promise.reject(`Failed to add to views for clip ${ clipID }`)
         }
 
-        const views = <number> (await res.json())
-
-        return Promise.resolve(views)
+        return Promise.resolve()
     } catch(err) {
         console.trace(err)
 

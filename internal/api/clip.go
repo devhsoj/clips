@@ -3,7 +3,7 @@ package api
 import (
 	"clips/internal/config"
 	"clips/internal/db"
-	models2 "clips/pkg/models"
+	"clips/pkg/models"
 	"fmt"
 	"github.com/go-pg/pg/v10"
 	"github.com/gofiber/fiber/v2"
@@ -20,7 +20,7 @@ func NewClip(c *fiber.Ctx) error {
 		})
 	}
 
-	user := c.Locals("user").(models2.User)
+	user := c.Locals("user").(models.User)
 
 	clipFile,err := c.FormFile("clip")
 
@@ -53,7 +53,7 @@ func NewClip(c *fiber.Ctx) error {
 	clipTitle := c.FormValue("title","No Title")
 	clipDescription := c.FormValue("description","No Description")
 
-	clip := models2.Clip{
+	clip := models.Clip{
 		UserID: user.UserID,
 		Creator: user.Username,
 		Type: clipFile.Header.Get("Content-Type"),
@@ -79,7 +79,7 @@ func NewClip(c *fiber.Ctx) error {
 func GetClip(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 
-	clip := models2.Clip{}
+	clip := models.Clip{}
 
 	err := db.Database.Model(&clip).
 		Where("clip_id = ?",clipID).
@@ -107,7 +107,7 @@ func GetClips(c *fiber.Ctx) error {
 	page,_ := strconv.Atoi(c.Query("page","0"))
 	amount,_ := strconv.Atoi(c.Query("amount","10"))
 
-	var clips []models2.Clip
+	var clips []models.Clip
 
 	err := db.Database.Model(&clips).
 		Order("clip_id ASC").
@@ -136,11 +136,12 @@ func GetClips(c *fiber.Ctx) error {
 func ViewClip(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 
-	clip := models2.Clip{}
+	var clipSource string
 
-	err := db.Database.Model(&clip).
+	err := db.Database.Model(&models.Clip{}).
 		Where("clip_id = ?",clipID).
-		Select()
+		Column("source").
+		Select(&clipSource)
 
 	if err != nil {
 
@@ -160,38 +161,13 @@ func ViewClip(c *fiber.Ctx) error {
 
 	}
 
-	return c.SendFile(clip.Source,true)
+	return c.SendFile(clipSource,true)
 }
 
 func IncrementViews(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 
-	var views uint64
-
-	err := db.Database.Model(&models2.Clip{}).
-		Column("views").
-		Where("clip_id = ?",clipID).
-		Select(&views)
-
-	if err != nil {
-
-		if err == pg.ErrNoRows {
-			if err == pg.ErrNoRows {
-				return c.Status(404).JSON(fiber.Map{
-					"error":"Clip not found",
-				})
-			}
-
-			log.Println(err)
-
-			return c.Status(500).JSON(fiber.Map{
-				"error":"Unknown Error",
-			})
-		}
-
-	}
-
-	_,err = db.Database.Model(&models2.Clip{}).
+	_,err := db.Database.Model(&models.Clip{}).
 		Set("views = views + 1").
 		Where("clip_id = ?",clipID).
 		Update()
@@ -204,5 +180,5 @@ func IncrementViews(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.JSON(views + 1)
+	return c.SendStatus(200)
 }
