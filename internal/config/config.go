@@ -56,6 +56,7 @@ func LoadConfig() error {
 	}
 
 	ClipSavePath = os.Getenv("CLIP_SAVE_PATH")
+
 	AllowSignup = os.Getenv("ALLOW_SIGNUP") == "true" || os.Getenv("ALLOW_SIGNUP") == ""
 	AllowUpload = os.Getenv("ALLOW_UPLOAD") == "true" || os.Getenv("ALLOW_UPLOAD") == ""
 

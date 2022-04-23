@@ -21,7 +21,6 @@ func NewClip(c *fiber.Ctx) error {
 	}
 
 	user := c.Locals("user").(models.User)
-
 	clipFile,err := c.FormFile("clip")
 
 	if err != nil {

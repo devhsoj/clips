@@ -12,6 +12,10 @@ func Auth(c *fiber.Ctx) error {
 
 	if err != nil {
 		log.Printf("Failed to get session: %s",err)
+
+		return c.Status(500).JSON(fiber.Map{
+			"error":"Unknown Error",
+		})
 	}
 
 	if sess.Get("active") == true {
