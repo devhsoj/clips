@@ -1,12 +1,11 @@
 import {ConditionsFailedEvent, replace} from 'svelte-spa-router'
+import {getMe} from './lib/user'
 
-async function checkAuthentication() {
+async function isAuthenticated() {
     try {
-        const res = await fetch('/api/ping',{
-            method:'HEAD'
-        })
+        const user = await getMe()
 
-        if(res.status !== 200) {
+        if(!user) {
             return Promise.resolve(false)
         }
 
@@ -32,6 +31,6 @@ function conditionsFailed(event:ConditionsFailedEvent) {
 }
 
 export {
-    checkAuthentication,
-    conditionsFailed
+    conditionsFailed,
+    isAuthenticated
 }

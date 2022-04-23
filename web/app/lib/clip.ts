@@ -68,6 +68,7 @@ async function incrementViews(clipID:number):Promise<void> {
 }
 
 export {
+    Clip,
     getClip,
     getClips,
     incrementViews

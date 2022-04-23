@@ -13,7 +13,6 @@ var ClipRouter fiber.Router
 func SetupAPIRoutes() {
 	// API index routing
 	APIRouter = data.Application.Group("/api",api.Auth)
-	APIRouter.Get("/ping",api.Ping)
 
 	// User API routing
 	UserRouter = APIRouter.Group("/user")

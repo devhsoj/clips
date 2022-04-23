@@ -11,7 +11,25 @@ import (
 
 func GetMe(c *fiber.Ctx) error {
 
-	user := c.Locals("user")
+	includeClips := c.Query("includeClips","false") == "true"
+	user := c.Locals("user").(models.User)
+
+	if !includeClips {
+		return c.JSON(&user)
+	}
+
+	err := db.Database.Model(&user).
+		Where("user_id = ?",user.UserID).
+		Relation("Clips").
+		Select(&user)
+
+	if err != nil {
+		log.Println(err)
+
+		return c.Status(500).JSON(fiber.Map{
+			"message":"Unexpected Error",
+		})
+	}
 
 	return c.JSON(&user)
 }

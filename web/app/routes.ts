@@ -1,5 +1,5 @@
-import { wrap } from 'svelte-spa-router/wrap'
-import { checkAuthentication } from './auth'
+import {wrap} from 'svelte-spa-router/wrap'
+import {isAuthenticated} from './auth'
 
 import Home from './svelte/Home.svelte'
 import Login from './svelte/Login.svelte'
@@ -12,7 +12,7 @@ export default {
         component:Home,
         conditions:[
             async () => {
-                return await checkAuthentication()
+                return await isAuthenticated()
             }
         ]
     }),
@@ -20,7 +20,7 @@ export default {
         component:Login,
         conditions:[
             async () => {
-                return !(await checkAuthentication())
+                return !(await isAuthenticated())
             }
         ]
     }),
@@ -28,7 +28,7 @@ export default {
         component:Signup,
         conditions:[
             async () => {
-                return !(await checkAuthentication())
+                return !(await isAuthenticated())
             }
         ]
     }),
@@ -36,7 +36,7 @@ export default {
         component:Upload,
         conditions:[
             async () => {
-                return await checkAuthentication()
+                return await isAuthenticated()
             }
         ]
     }),
@@ -44,7 +44,7 @@ export default {
         component:Clip,
         conditions:[
             async () => {
-                return await checkAuthentication()
+                return await isAuthenticated()
             }
         ]
     })
