@@ -42,4 +42,9 @@ npm run dev
 ```
 
 ## Docker
-**Coming Soon**
+
+**Note:** Make sure you have a valid .env that works with docker (See .env.docker.example)
+```bash
+cd clips/
+docker-compose -f .\docker\docker-compose.yml up -d --build
+```
