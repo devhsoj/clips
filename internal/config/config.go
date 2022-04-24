@@ -91,6 +91,10 @@ func CreateClipStorageDirectory() (string,error) {
 	storagePath := path.Join(ApplicationPath,"build/","uploads/")
 
 	if err := os.Mkdir(storagePath,0777); err != nil {
+		if os.IsExist(err) {
+			return path.Join(ApplicationPath,"build/","uploads/"),nil
+		}
+
 		return "",err
 	}
 
