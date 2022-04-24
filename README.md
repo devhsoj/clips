@@ -2,9 +2,7 @@
 
 Project Clips is a simple video hosting platform that enables people to share and view clips.
 
-
-
-## Installation
+## Getting Started
 
 ### Using Docker
 
@@ -12,8 +10,10 @@ Project Clips is a simple video hosting platform that enables people to share an
 ```bash
 git clone https://github.com/devhsoj/clips
 cd clips/
-docker-compose -f .\docker\docker-compose.yml up -d --build # that's it!
+docker-compose -f .\docker\docker-compose.yml up -d --build # that's all it takes to get it built & running!
 ```
+
+---
 
 ### Without Docker
 
@@ -39,7 +39,7 @@ CREATE EXTENSION pgcrypto; -- Used for generating UUIDs
 
 #### Run with npm
 ```bash
-npm start # or with pm2: pm2 start npm --name "clips" -- start
+npm start # or with pm2: pm2 start npm --name clips -- start
 ```
 or
 
@@ -47,7 +47,7 @@ or
 ```bash
 ./build/clips # or ./build/clips.exe
 ```
-
+---
 ## Development
 
 #### Starting
