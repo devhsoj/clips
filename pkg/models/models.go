@@ -5,6 +5,7 @@ import (
 	"github.com/go-pg/pg/v10/orm"
 )
 
+// Setup is used to set up & created the needed tables in the Postgres database with the specified models.
 func Setup(db *pg.DB) {
 
 	models := []interface{}{

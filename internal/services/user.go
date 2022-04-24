@@ -9,6 +9,7 @@ import (
 	"log"
 )
 
+// Signup takes a data.Login and returns a Response based on the result of creating a user.
 func Signup(login data.Login) (Response,error) {
 
 	hashedPassword,err := bcrypt.GenerateFromPassword([]byte(login.Password),config.BcryptCost)

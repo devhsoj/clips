@@ -9,6 +9,7 @@ import (
 	"log"
 )
 
+// APIKeyAuth returns a Response generated from the results of trying to authenticate a user with the given apiKey.
 func APIKeyAuth(apiKey string) Response {
 	user := models.User{}
 
@@ -30,6 +31,7 @@ func APIKeyAuth(apiKey string) Response {
 	return Response{Success: true, Status: 200, Message: "Success", User: user}
 }
 
+// UserAuth returns a Response generated from the results of trying to authenticate with the given data.Login.
 func UserAuth(login data.Login) Response {
 	user := models.User{}
 

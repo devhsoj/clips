@@ -8,6 +8,7 @@ import (
 
 var Database *pg.DB
 
+// Setup tries to connect using the configured PostgreSQL connection URL.
 func Setup() {
 	options,err := pg.ParseURL(config.PostgresURL)
 

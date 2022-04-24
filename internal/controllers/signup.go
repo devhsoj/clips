@@ -8,6 +8,8 @@ import (
 	"log"
 )
 
+// Signup is called whenever a user hits POST /auth/signup. It's passed the information from the form in Signup.svelte,
+// and tries to create a user with the specified information.
 func Signup(c *fiber.Ctx) error {
 
 	if !config.AllowSignup {
@@ -45,6 +47,7 @@ func Signup(c *fiber.Ctx) error {
 
 	if err = sess.Save(); err != nil {
 		log.Printf("Failed to save session: %s",err)
+
 		return c.Status(500).SendString("Unexpected Error")
 	}
 

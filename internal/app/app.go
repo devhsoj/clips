@@ -32,11 +32,13 @@ func Start() {
 	// Setup session store
 	data.Store = session.New()
 
-	// Setup static router for serving svelte bundles and other static files
+	// Setup static router for serving Svelte bundle and other static files
 	data.Application.Static("/","./web/static/",fiber.Static{Compress: true})
 
-	// Setup other routes
+	// Setup API routing
 	routes.SetupAPIRoutes()
+
+	// Setup auth routing
 	routes.SetupAuthRoutes()
 
 	var err error

@@ -7,6 +7,8 @@ import (
 	"log"
 )
 
+// Login is called whenever a user hits POST /auth/login. It's passed the credentials from the form in Login.svelte, and
+// tries to authenticate.
 func Login(c *fiber.Ctx) error {
 
 	sess,err := data.Store.Get(c)

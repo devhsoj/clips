@@ -13,6 +13,9 @@ import (
 	"time"
 )
 
+// NewClip is called whenever a user hits POST /api/clip/new. It reads the options given in the form in Upload.svelte,
+// creates a Clip in the database, stores the uploaded video file in the configured clip storage path, and responds with
+// the JSON representation of the newly created Clip.
 func NewClip(c *fiber.Ctx) error {
 	if !config.AllowUpload {
 		return c.Status(500).JSON(fiber.Map{
@@ -75,6 +78,8 @@ func NewClip(c *fiber.Ctx) error {
 	return c.JSON(&clip)
 }
 
+// GetClip is called whenever a user hits GET /api/clip/:clip_id. It responds with information about the specified Clip
+// in JSON format.
 func GetClip(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 
@@ -102,6 +107,8 @@ func GetClip(c *fiber.Ctx) error {
 	return c.JSON(&clip)
 }
 
+// GetClips is called whenever a user hits GET /api/clip/get. It returns a JSON array of Clips, retrieved by pagination
+// from the db, specified by the query parameters (page,amount).
 func GetClips(c *fiber.Ctx) error {
 	page,_ := strconv.Atoi(c.Query("page","0"))
 	amount,_ := strconv.Atoi(c.Query("amount","10"))
@@ -132,6 +139,8 @@ func GetClips(c *fiber.Ctx) error {
 	return c.JSON(&clips)
 }
 
+// ViewClip is called whenever a user hits GET /api/clip/view/:clip_id. It responds with the specified Clip's raw video
+// data stored in the configured clip storage path.
 func ViewClip(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 
@@ -163,6 +172,8 @@ func ViewClip(c *fiber.Ctx) error {
 	return c.SendFile(clipSource,true)
 }
 
+// IncrementViews is called whenever a user hits POST /api/clip/views/:clip_id. It increments the amount of views of
+// the specified Clip by the :clip_id parameter, and responds with an empty body & 200 status code.
 func IncrementViews(c *fiber.Ctx) error {
 	clipID,_ := strconv.ParseInt(c.Params("clip_id","0"),10,64)
 

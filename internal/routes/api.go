@@ -10,6 +10,7 @@ var APIRouter fiber.Router
 var UserRouter fiber.Router
 var ClipRouter fiber.Router
 
+// SetupAPIRoutes sets up all routing under /api.
 func SetupAPIRoutes() {
 	// API index routing
 	APIRouter = data.Application.Group("/api",api.Auth)

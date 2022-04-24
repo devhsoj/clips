@@ -2,6 +2,7 @@ package models
 
 import "time"
 
+// User represents the logical information of a user in the Postgres database.
 type User struct {
 	UserID uint64 		`pg:",pk" json:"user_id"`
 	Username string 	`pg:"type:varchar(16),unique,notnull" json:"username"`

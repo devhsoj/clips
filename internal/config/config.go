@@ -7,22 +7,22 @@ import (
 	"strconv"
 )
 
-var HTTPS bool
-var TLSCertPath string
-var TLSKeyPath string
-var ListenAddress string
-var PostgresURL string
+var HTTPS bool // Whether to use https.
+var TLSCertPath string // The path to the SSL/TLS certificate.
+var TLSKeyPath string // The path to the SSL/TLS key.
+var ListenAddress string // The address for the HTTP/HTTPS server to listen on.
+var PostgresURL string // The PostgreSQL connection URL used for all database operations.
 
-var ApplicationPath string
+var ApplicationPath string // The current working directory of the running executable.
 
-var BcryptCost int = 12 // Default to 12, so we don't have slow signups/logins
-var BodyLimit int = 100 * 1024 * 1024  // Default to 100 MB
+var BcryptCost int = 12 // The cost factor used in Bcrypt. Default to 12.
+var BodyLimit int = 100 * 1024 * 1024  // The body limit of all HTTP/HTTPS requests. Default to 100 MB
 
-var ClipSavePath string
-var AllowSignup bool = true
-var AllowUpload bool = true
+var ClipSavePath string // The path to the directory used to store user uploaded clips.
+var AllowSignup bool = true // Whether to allow signups.
+var AllowUpload bool = true // Whether to allow uploads.
 
-// LoadConfig loads the environment variables from .env into the above variables
+// LoadConfig loads the environment variables from .env into global config variables.
 func LoadConfig() error {
 	var err error
 
@@ -85,7 +85,7 @@ func LoadConfig() error {
 	return err
 }
 
-
+// CreateClipStorageDirectory creates a directory used to store user uploads if no directory was already specified.
 func CreateClipStorageDirectory() (string,error) {
 
 	storagePath := path.Join(ApplicationPath,"build/","uploads/")

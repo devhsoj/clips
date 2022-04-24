@@ -8,6 +8,7 @@ import (
 
 var AuthRouter fiber.Router
 
+// SetupAuthRoutes sets up all routing under /auth.
 func SetupAuthRoutes() {
 	AuthRouter = data.Application.Group("/auth")
 

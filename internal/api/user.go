@@ -9,6 +9,8 @@ import (
 	"strconv"
 )
 
+// GetMe is called whenever a user hits GET /api/user/me. It responds with the User data of the active user in JSON
+// format.
 func GetMe(c *fiber.Ctx) error {
 
 	includeClips := c.Query("includeClips","false") == "true"
@@ -34,6 +36,8 @@ func GetMe(c *fiber.Ctx) error {
 	return c.JSON(&user)
 }
 
+// GetUser is called whenever a user hits GET /api/user/:user_id. It responds with the specified User's data in JSON
+// format.
 func GetUser(c *fiber.Ctx) error {
 	userID,_ := strconv.ParseInt(c.Params("user_id","0"),10,64)
 

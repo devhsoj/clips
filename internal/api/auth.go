@@ -7,6 +7,7 @@ import (
 	"log"
 )
 
+// Auth is used to authenticate every request that hits /api/*
 func Auth(c *fiber.Ctx) error {
 	sess,err := data.Store.Get(c)
 

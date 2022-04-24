@@ -8,6 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// NewUser takes either two sys arguments or inputs (username and password), and creates a user in the database
 func NewUser(args []string) error {
 
 	var username string

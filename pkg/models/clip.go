@@ -2,6 +2,7 @@ package models
 
 import "time"
 
+// Clip represents the logical information of a user uploaded clip in the Postgres database.
 type Clip struct {
 	ClipID uint64 		 `pg:",pk" json:"clip_id"`
 	UserID uint64 		 `pg:",notnull" json:"user_id"`
