@@ -10,7 +10,7 @@ Project Clips is a simple video hosting platform that enables people to share an
 ```bash
 git clone https://github.com/devhsoj/clips
 cd clips/
-docker-compose -f .\docker\docker-compose.yml up -d --build # that's all it takes to get it built & running!
+docker-compose -f .\docker\docker-compose.yml up -d --build
 ```
 
 ---
@@ -35,7 +35,7 @@ CREATE EXTENSION pgcrypto; -- Used for generating UUIDs
 
 ### Starting
 
-**Note:** Make sure you have run `npm run build` before-hand, and have a proper `.env`
+**Note:** Make sure you have run the command `npm run build` before-hand, and have a valid `.env`
 
 #### Run with npm
 ```bash
@@ -52,6 +52,6 @@ or
 
 #### Starting
 ```bash
-# concurrently starts rollup in watch mode for web/app/, and nodemon to wait for changes in internal/
+# uses concurrently to start rollup & nodemon in watch mode for the web/app/ & internal/ directories
 npm run dev 
 ```
