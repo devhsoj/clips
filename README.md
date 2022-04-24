@@ -43,7 +43,7 @@ npm run dev
 
 ## Docker
 
-**Note:** Make sure you have a valid .env that works with docker (See .env.docker.example)
+**Note:** Make sure you have a valid .env that works with docker (See [.env.docker.example](https://github.com/devhsoj/clips/blob/master/.env.docker.example))
 ```bash
 cd clips/
 docker-compose -f .\docker\docker-compose.yml up -d --build
