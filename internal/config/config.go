@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/joho/godotenv"
 	"os"
+	"path"
 	"strconv"
 )
 
@@ -11,6 +12,8 @@ var TLSCertPath string
 var TLSKeyPath string
 var ListenAddress string
 var PostgresURL string
+
+var ApplicationPath string
 
 var BcryptCost int = 12 // Default to 12, so we don't have slow signups/logins
 var BodyLimit int = 100 * 1024 * 1024  // Default to 100 MB
@@ -35,7 +38,16 @@ func LoadConfig() error {
 	}
 
 	ListenAddress = os.Getenv("LISTEN_ADDRESS")
+
+	if ListenAddress == "" {
+		ListenAddress = "0.0.0.0:3000"
+	}
+
 	PostgresURL = os.Getenv("POSTGRES_URL")
+
+	if PostgresURL == "" {
+		PostgresURL = "postgres://postgres:postgres@localhost/clips?sslmode=disable"
+	}
 
 	if os.Getenv("BCRYPT_COST") != "" {
 		BcryptCost,err = strconv.Atoi(os.Getenv("BCRYPT_COST"))
@@ -60,5 +72,27 @@ func LoadConfig() error {
 	AllowSignup = os.Getenv("ALLOW_SIGNUP") == "true" || os.Getenv("ALLOW_SIGNUP") == ""
 	AllowUpload = os.Getenv("ALLOW_UPLOAD") == "true" || os.Getenv("ALLOW_UPLOAD") == ""
 
+	ApplicationPath,err = os.Getwd()
+
+	if err != nil {
+		return err
+	}
+
+	if ClipSavePath == "" {
+		ClipSavePath,err = CreateClipStorageDirectory()
+	}
+
 	return err
+}
+
+
+func CreateClipStorageDirectory() (string,error) {
+
+	storagePath := path.Join(ApplicationPath,"build/","uploads/")
+
+	if err := os.Mkdir(storagePath,0777); err != nil {
+		return "",err
+	}
+
+	return storagePath,nil
 }

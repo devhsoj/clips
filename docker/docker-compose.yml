@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=clips
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    expose:
+      - 5432
+    volumes:
+      - clips-db:/var/lib/postgresql/data
+  clips:
+    build:
+      context: ../
+      dockerfile: docker/clips/Dockerfile
+    depends_on:
+      - db
+    ports:
+      - '3000:3000'
+volumes:
+  clips-db:
