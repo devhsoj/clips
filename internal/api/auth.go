@@ -22,8 +22,6 @@ func Auth(c *fiber.Ctx) error {
 	if sess.Get("active") == true {
 		c.Locals("active",true)
 		c.Locals("user",sess.Get("user"))
-
-		return c.Next()
 	}
 
 	// If there is an API key in the header, then set the authenticated user with the specified API key
@@ -34,8 +32,6 @@ func Auth(c *fiber.Ctx) error {
 		if res := services.APIKeyAuth(apiKey); res.Success {
 			c.Locals("active",true)
 			c.Locals("user",res.User)
-
-			return c.Next()
 		}
 	}
 
