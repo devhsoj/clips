@@ -17,6 +17,12 @@ import (
 // creates a Clip in the database, stores the uploaded video file in the configured clip storage path, and responds with
 // the JSON representation of the newly created Clip.
 func NewClip(c *fiber.Ctx) error {
+	if c.Locals("active") != true {
+		return c.Status(401).JSON(fiber.Map{
+			"error":"Guests are not allowed to upload",
+		})
+	}
+
 	if !config.AllowUpload {
 		return c.Status(500).JSON(fiber.Map{
 			"error":"Uploading is disabled",

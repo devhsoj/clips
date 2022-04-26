@@ -14,6 +14,11 @@ import (
 func GetMe(c *fiber.Ctx) error {
 
 	includeClips := c.Query("includeClips","false") == "true"
+
+	if c.Locals("active") != true {
+		return c.JSON(nil)
+	}
+
 	user := c.Locals("user").(models.User)
 
 	if !includeClips {

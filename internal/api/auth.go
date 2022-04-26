@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-// Auth is used to authenticate every request that hits /api/*
+// Auth is used to set the authenticated user for every request that hits /api/*
 func Auth(c *fiber.Ctx) error {
 	sess,err := data.Store.Get(c)
 
@@ -20,24 +20,24 @@ func Auth(c *fiber.Ctx) error {
 	}
 
 	if sess.Get("active") == true {
+		c.Locals("active",true)
 		c.Locals("user",sess.Get("user"))
 
 		return c.Next()
 	}
 
-	// We keep these auth checks separate so one doesn't get called if the other passes
+	// If there is an API key in the header, then set the authenticated user with the specified API key
 
 	apiKey := c.GetReqHeaders()["X-Api-Key"]
 
-	if len(apiKey) == 0 {
-		return c.SendStatus(401)
+	if len(apiKey) != 0 {
+		if res := services.APIKeyAuth(apiKey); res.Success {
+			c.Locals("active",true)
+			c.Locals("user",res.User)
+
+			return c.Next()
+		}
 	}
 
-	if res := services.APIKeyAuth(apiKey); res.Success {
-		c.Locals("user",res.User)
-
-		return c.Next()
-	}
-
-	return c.SendStatus(401)
+	return c.Next()
 }

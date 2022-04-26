@@ -9,12 +9,7 @@ import Clip from './svelte/Clip.svelte'
 
 export default {
     '/':wrap({
-        component:Home,
-        conditions:[
-            async () => {
-                return await isAuthenticated()
-            }
-        ]
+        component:Home
     }),
     '/login':wrap({
         component:Login,
@@ -41,11 +36,6 @@ export default {
         ]
     }),
     '/clip/:clip_id':wrap({
-        component:Clip,
-        conditions:[
-            async () => {
-                return await isAuthenticated()
-            }
-        ]
+        component:Clip
     })
 }

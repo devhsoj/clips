@@ -79,6 +79,7 @@
             <aside class="col-xl-3 sidebar sticky-sidebar mt-md-0 py-16 d-none d-xl-block">
                 <nav>
                     <ul class="nav list-unstyled lh-lg text-reset d-block">
+                        <li class="nav-item"><a class="nav-link" href="/" use:link>Home</a></li>
                     </ul>
                 </nav>
             </aside>

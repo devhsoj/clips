@@ -3,7 +3,10 @@
 <script lang="ts">
     import { getClips, incrementViews } from '../lib/clip'
     import { link } from 'svelte-spa-router'
+    import { getMe } from '../lib/user'
+    import { onMount } from 'svelte'
 
+    let user = null
     let container = null
 
     let clips = []
@@ -61,6 +64,14 @@
             console.trace(err)
         }
     }
+
+    onMount(async () => {
+        try {
+            user = await getMe()
+        } catch (err) {
+            console.trace(err)
+        }
+    })
 </script>
 
 <body bind:this={container} on:scroll={handleScroll}>
@@ -112,7 +123,11 @@
                     <nav>
                         <ul class="nav list-unstyled lh-lg text-reset d-block">
                             <li class="nav-item"><a class="nav-link" href="/" use:link>Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/upload" use:link>Upload</a></li>
+                            {#if user}
+                                <li class="nav-item"><a class="nav-link" href="/upload" use:link>Upload</a></li>
+                            {:else}
+                                <li class="nav-item"><a class="nav-link" href="/login" use:link>Login</a></li>
+                            {/if}
                         </ul>
                     </nav>
                 </aside>
