@@ -3,10 +3,13 @@
 <script lang="ts">
     import { getClip, incrementViews } from '../lib/clip'
     import { link } from 'svelte-spa-router'
+    import { getMe } from '../lib/user'
+    import { onMount } from 'svelte'
 
     export let params = {}
 
     let clip = null
+    let user = null
 
     async function onClipEnd(clip_id) {
         try {
@@ -27,7 +30,31 @@
             console.trace(err)
         }
     }
+
+    onMount(async () => {
+        try {
+            user = await getMe()
+        } catch (err) {
+            console.trace(err)
+        }
+    })
 </script>
+
+<svelte:head>
+    <title>{clip?.title} ({clip?.creator}) - Project Clips</title>
+
+    <meta property="og:site_name" content="Project Clips" />
+    <meta property="og:title" content="{clip?.title}" />
+
+    <meta name="description" content="{clip?.description}" />
+    <meta property="og:description" content="{clip?.description}" />
+
+    <meta property="og:url" content="{window.location.origin}" />
+    <meta property="og:type" content="video.other" />
+    <meta property="og:video" content="{window.location.origin}/api/clips/view/{clip?.clip_id}" />
+    <meta property="og:video:url" content="{window.location.origin}/api/clips/view/{clip?.clip_id}" />
+    <meta property="og:video:type" content="{clip?.type}" />
+</svelte:head>
 
 <div class="content-wrapper" on:load={loadClip()}>
     <section class="wrapper bg-soft-primary">
@@ -69,7 +96,11 @@
                 <nav>
                     <ul class="nav list-unstyled lh-lg text-reset d-block">
                         <li class="nav-item"><a class="nav-link" href="/" use:link>Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/upload" use:link>Upload</a></li>
+                        {#if user}
+                            <li class="nav-item"><a class="nav-link" href="/upload" use:link>Upload</a></li>
+                        {:else}
+                            <li class="nav-item"><a class="nav-link" href="/login" use:link>Login</a></li>
+                        {/if}
                     </ul>
                 </nav>
             </aside>

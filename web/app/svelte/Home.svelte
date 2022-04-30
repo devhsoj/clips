@@ -101,7 +101,9 @@
                         {:else}
                             {#each clips as clip}
                                 <section class="container clip">
-                                    <h3 class="clip-link"><a href="/clip/{clip.clip_id}" use:link style="color:inherit;text-decoration:inherit;">{clip.title}</a></h3>
+                                    <h3 class="clip-link">
+                                        <a href="/clip/{clip.clip_id}" use:link style="color:inherit;text-decoration:inherit;">{clip.title}</a>
+                                    </h3>
                                     <p class="small" style="color:grey;">
                                         {clip.description} - <strong>{clip.creator}</strong>
                                     </p>

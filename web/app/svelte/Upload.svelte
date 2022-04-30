@@ -80,7 +80,6 @@
                 <nav>
                     <ul class="nav list-unstyled lh-lg text-reset d-block">
                         <li class="nav-item"><a class="nav-link" href="#/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#/upload">Upload</a></li>
                     </ul>
                 </nav>
             </aside>
