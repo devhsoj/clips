@@ -42,19 +42,6 @@
 
 <svelte:head>
     <title>{clip?.title} ({clip?.creator}) - Project Clips</title>
-
-    <meta property="og:site_name" content="Project Clips" />
-    <meta property="og:title" content="{clip?.title}" />
-
-    <meta name="description" content="{clip?.description}" />
-    <meta property="og:description" content="{clip?.description}" />
-
-    <meta property="og:url" content="{window.location.origin}" />
-    <meta property="og:video" content="{window.location.origin}/api/clips/view/{clip?.clip_id}" />
-    <meta property="og:video:url" content="{window.location.origin}/api/clips/view/{clip?.clip_id}" />
-    <meta property="og:video:type" content="{clip?.type}" />
-    <meta property="og:video:width" content="1920">
-    <meta property="og:video:height" content="1080">
 </svelte:head>
 
 <div class="content-wrapper" on:load={loadClip()}>
